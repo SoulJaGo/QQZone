@@ -1,0 +1,372 @@
+
+
+module LBS_V2_PROTOCOL
+{
+    enum APPID
+    {
+        QZONE_SWITCH_CLIENT = 100101,      //切换前台
+        QZONE_PRESS_ADDBUTTON = 100102,    //点加号
+        QZONE_PUBLISH_SHUOSHUO = 100103,   //发表说说
+        QZONE_PUBLISH_SIGN = 100104,       //发表签到
+        QZONE_USE_WATERMARK = 100105,      //使用水印相机
+        QZONE_PUBLISH_PHOTO = 100106,      //发表照片
+        QZONE_PUBLISH_VIDEO = 100107,      //发表视频 
+        QZONE_HOST_COVER_WEATHER = 100108, //主人态cover天气
+        QZONE_HOST_WEATHER_DETAIL = 100109,//主人态天气详情
+        QZONE_FRIEND_COVER_WEATHER = 100110, //好友cover天气
+        QZONE_FRIEND_WEATHER_DETAIL = 100111,//好友天气详情
+                
+        QQ_PRESS_FRIENDFEED = 100201,  //进入好友动态
+        QQ_PRESS_ADDBUTTON = 100202,   //点击加号
+        QQ_PUBLISH_SHUOSHUO = 100203,  //发表说说
+        QQ_USE_WATERMARK = 100204,     //使用水印相机
+        QQ_PUBLISH_PHOTO = 100205,     //发照片
+        QQ_HOST_COVER_WEATHER = 100206, //主人cover天气
+        QQ_HOST_WEATHER_DETAIL = 100207,//天气详情 
+        QQ_PUBLISH_SIGN = 100208,       //发表签到
+        QQ_SWITCH_CLIENT = 100209,      //切换前台
+    };
+    
+	enum DEVICETYPE_V2
+	{
+		E_OS_ANDROID_V2	= 1,	//安卓
+		E_OS_IPHONE_V2	= 2,	//iphone
+		E_OS_SYMBIAN_V2	= 3,	//Symbian
+		E_OS_WP_V2		= 4,	//windows phone
+		E_OS_WINPC_V2	= 5,	//PC windows
+	};
+
+	enum GPSTYPE_V2
+	{
+		GPS_WGS84_V2	= 0,	// WGS-84系统的坐标(一般手机硬件读到数值的是该系统)
+		GPS_MARS_V2	= 1,	// 火星坐标(按保密局要求加扰后的坐标，
+					// 用于国内地图展示或POI相对位置处理等)
+		GPS_WGS_REAL_V2	= 2	// 确认输入为硬件读出来的GPS，而不是像iphone或android自己使用cell,wifi定位的数值
+	};
+
+	// 用户的GPS,默认值为非法值,用来表示没有GPS
+	struct GPS_V2
+	{
+        0 require int		iLat = 900000000;	// 纬度
+        1 require int		iLon = 900000000;	// 经度
+		2 require int		eType = 2;		// = GPS_WGS84; // 如果是从手机硬件读出来的，要设置此gps为WGS84 // 如果是SDK返回使用GPS_MARS
+		3 optional int		iAlt = -10000000;	// 海拨
+	};
+	
+	// 以下属性手机终端可以读出,详见wikipedia
+	struct Cell_V2
+	{
+		0 require short shMcc = -1; // 国家码, mobile country code.中国是460
+		1 require short shMnc = -1; // 网络码, mobile network code.最常见的:移动是0, 联通是1
+		2 require int iLac    = -1; // 区域码, location area code
+		3 require int iCellId = -1; // cell id
+		4 optional int iRssi  = 0 ; // 信号强度(dBm为单位)终端获取到的为asu,要转换为dbm  dBm=-113+2*asu
+		5 optional double dStationLat ;// 基站对应的经度，只针对CDMA有效，需操作系统API支持，如Android平台
+		6 optional double dStationLon ;// 基站对应的纬度，只针对CDMA有效，需操作系统API支持，如Android平台
+	};
+	struct Wifi_V2
+	{
+		0 require string	strMac; // wifi接入access接入机的mac地址
+		1 optional int		iRssi ; // 信号强度(dBm为单位)终端获取到的为asu,要转换为dbm  dBm=-113+2*asu
+	};
+
+	// 接口输入的“接受分类”属性可以输入任意级别的分类
+	enum POITYPE_V2
+	{
+		POI_FOOD_V2     = 100000, // 餐饮酒楼
+		POI_ORG_V2      = 120000, // 机构团体
+		POI_SHOPPING_V2 = 130000, // 购物
+		POI_SERVICE_V2  = 140000, // 生活服务
+		POI_ENTM_V2     = 160000, // 休闲娱乐
+		POI_CULTURE_V2  = 170000, // 教育学校,文化场馆
+		POI_HEALTH_V2   = 200000, // 医疗保健
+		POI_HOTEL_V2    = 210000, // 酒店宾馆
+		POI_TOUR_V2     = 220000, // 旅游景点
+		POI_PLACE_V2    = 260000, // 地名地址
+		POI_INFRA_V2    = 270000, // 交通设施
+		POI_WORK_V2     = 280000  // 办公
+	};
+	
+	//天气
+	enum WEATHER_V2
+	{
+		DEFAULT_V2 = -1, 	//默认
+		SUNSHINE_V2 = 0,  	//晴
+		CLOUDY_V2,      	//多云
+		OVERCAST_V2,    	//阴
+		RAINY_V2,       	//雨
+		SNOW_V2,        	//雪
+		FOG_V2,         	//雾
+		RAINANDSNOW_V2, 	//雨夹雪
+		THUNDERSHOWER_V2,	//雷阵雨
+		SAND_V2, 			//沙 
+		WIND_V2, 			//风
+	};
+	enum WIND_DIRECTION_V2
+	{
+		NO_WIND_V2 = 0, 	//无风
+		EAST_NORTH_V2,  	//东北
+		EAST_V2,  		//东
+		EAST_SOUTH_V2,	//东南
+		SOUTH_V2,		//南
+		WEST_SOUTH_V2,	//西南
+		WEST_V2,		//西
+		WEST_NORTHv,	//西北
+		NORTH_V2,		//北
+		UNCERTAINTY_V2,	//旋转不定
+	};
+
+	//协议的公共部分 
+	struct ReqCommon_V2
+	{
+		0 require int		iAppId		= 0;	//业务id，区分业务
+		1 require int		iDeviceType	= 0;	//设备类型，区分客户端，记录日志使用
+	};
+
+	//位置信息
+	struct GeoInfo_V2
+	{
+		0 require int		iDistrictCode=0;// 行政区号(像身份证号前6位)
+		1 require int		iRange = -1;	// 定位的精确度，-1表示无此信息, 单位:m
+		2 require string	strCountry;	// 国家
+		3 require string	strProvince;	// 省、直辖市、自治区、特别行政区
+		4 require string	strCity;	// 地区、地级市、自治州、盟
+		5 require string	strDistrict;	// 县级市、自治县、旗、自治旗、特区、林区，以及市辖区
+		6 require string	strTown;	// 乡、镇、民族乡、街道
+		7 require string	strVillage;	// 村
+		8 require string	strRoad;	// 路,街道
+        9 optional string   strDefaultName; // 后台推荐的默认显示标题
+	};
+
+	//---------------------------------------------
+	// 查询地理位置信息
+	//
+	// 说明:
+	// 根据坐标或网关IP查询地理位置
+	// 直接请求逻辑server使用请求包GetGeoInfoReqBody和返回包GetGeoInfoResBody
+	// webapps使用请求包GetGeoInfoReq和返回包GetGeoInfoRes
+	//
+	// 子命令字 CMD_GET_GEO_INFO	= 11,	//定位地理位置
+	// 
+	//---------------------------------------------
+	struct GetGeoInfoReq_V2
+	{
+		0 require ReqCommon_V2	stCommon;	// 公共的头部
+		1 require string	strClientIP;	// 根据网关IP搜索
+		2 require GPS_V2		stGps;		// 定位的gps坐标
+		3 require vector<Cell_V2>  vCellData;	// 终端定位的基站数据
+		4 require vector<Wifi_V2>  vWifiData;	// 带上接入wifi的mac地址，后台收集，用来丰富gps定位
+		5 require int		iAccuracy =0;	// 精度，单位m；如果获取不到数据，这里填-1上报后台
+		6 require int		iLocateCostTime = 0;// 获取这个精度需要时间，单位ms	
+	};
+	struct GetGeoInfoRsp_V2
+	{
+		0 require GPS_V2		stGps;		// 用户的坐标,火星坐标,可用于在google地图与soso地图上准确显示
+		1 require GeoInfo_V2	stGeoInfo;	// 位置信息	
+	};
+
+	//POI属性信息
+	struct PoiInfo_V2
+	{
+		0 require string	strPoiId;	// poiID
+		1 require string	strName;	// poi名称
+		2 require int		iType;		// POI 类型
+		3 require string	strTypeName;	// 类型名称
+		4 require string	strAddress;	// poi地址
+		5 require int		iDistrictCode=0;// 行政区划编码，与身份证号前6位意义相同
+		6 require GPS_V2		stGps;		// 定位的gps坐标
+		7 require int		iDistance;	// 离输入点距离,单位:米
+		8 optional int		iHotValue = 0;	// 热度值
+		9 optional string	strPhone;	// 电话
+		10 optional string	strCountry;	// 国家
+		11 optional string	strProvince;	// 省、直辖市、自治区、特别行政区
+		12 optional string	strCity;	// 地区、地级市、自治州、盟
+		13 optional int iPoiNum;        //poi排序位置
+		14 optional int iPoiOrderType;  //poi优化类别 
+		15 optional string strDefaultName;	// 后台推荐的显示标题
+	};
+
+	//---------------------------------------------
+	// 搜索POI列表
+	//
+	// 说明:
+	// 1.查询条件可以是具体GPS坐标，也可以是城市ID+关键字，也可以是网关IP加关键字
+	// 2.支持分页
+	// 3.支持按POI类型检索
+	//
+	// 子命令字 CMD_GET_POI_INFO	= 10,	//获取POI列表
+	//
+	//---------------------------------------------
+	struct GetPoiInfoReq_V2
+	{
+		0 require ReqCommon_V2	stCommon;	// 公共的头部
+		1 require GPS_V2		stGps;		// 定位的gps坐标
+		2 require vector<Cell_V2> vCellData;	// 终端定位的基站数据
+		3 require vector<Wifi_V2> vWifiData;	// 带上接入wifi的mac地址，后台收集，用来丰富gps定位
+		4 require string	strClientIP;		// 根据网关IP搜索
+		5 require string	strKeyWord	= "";	// 带关键字搜索
+		6 require int		iDistance	= 100;	// 查找范围半径,单位m，范围(50,500]
+		7 optional int		iAccuracy	= 0;	// 精度，单位m；如果获取不到数据，这里填-1上报后台
+		8 optional int		iLocateCostTime = 0;	// 获取这个精度需要时间，单位ms
+		9 optional string  strAttachInfo;
+	};
+
+	struct GetPoiInfoRsp_V2
+	{
+		0 require vector<PoiInfo_V2> vPoiList;	//POI列表
+		1 optional int		  iTotalNum;		//POI总数 
+		2 optional string strAttachInfo;        //用来控制分页
+		3 optional int     iHasMore = 1;        //1表示有，0表示没有 
+	};
+
+    struct ForecastInfo
+    {
+        0 require int iTimestamp;    // 日期 
+        1 require int iDayWeather;   // 白天天气
+        2 require int iNightWeather; // 晚间天气
+        3 require int iTempMax;  // 最高温
+        4 require int iTempMin;  // 最低温
+    };
+    
+	//天气信息
+	struct WeatherInfo_V2
+	{
+		0 require int iRet;				//ret<0 取天气数据失败 或者 天气数据为空
+		1 require int iCityCode; 			//城市编码  
+		2 require string strCityName; 			//城市名称 
+		3 require string strDate; 			//当天日期
+		4 require int iHour;  				//当天时间 
+		5 require int iWeather; 			//天气  详细见WEATHER的定义
+		6 require int iWind; 				//风向  详细见WIND_DIRECTION的定义
+		7 require int iTempCurr; 			//时时温度 
+		8 require int iTempMax;				//当天最高温
+		9 require int iTempMin;				//当天最低温
+		10 require int iHumidity;			//当天湿度
+		11 optional string strSunriseTime; 		//日出时间
+		12 optional string strSunsetTime;  		//日落时间
+		13 optional string strPressure;    		//大气压力
+		14 optional int iWindForce;        		//风力 
+		15 optional string strDeviceName;  		//设备名 
+		16 optional int iPM2p5;            		//pm2.5  -1表示没有PM2.5
+		17 optional int iDayTime;               //是否白天标记 
+		18 optional unsigned int iCacheTime;   //客户端缓存时间    
+		19 optional vector<ForecastInfo> vecForecastInfo; //天气 
+		20 optional string strUrl;             //天气背景图片 
+		21 optional int iTimeUpdate;           //天气更新时间
+	};
+
+	//---------------------------------------------
+	// 查询地理位置信息、POI信息和天气信息 组合信息
+	//
+	// 说明:
+	// 根据坐标信息查询地理位置、POI和天气
+	// 返回所有类型的POI
+	//
+	// 子命令字 CMD_GET_LBS_COMBIN 	= 12,	//获取位置信息和POI信息 组合接口
+	// 
+	//---------------------------------------------		
+	struct GetLbsCombinReq_V2
+	{
+		0 require ReqCommon_V2	stCommon;			// 公共的头部
+		1 require string	strClientIP;		// 根据网关IP搜索
+		2 require GPS_V2		stGps;				// 定位的gps坐标
+		3 require vector<Cell_V2> vCellData;		// 终端定位的基站数据
+		4 require vector<Wifi_V2> vWifiData;		// 带上接入wifi的mac地址，后台收集，用来丰富gps定位
+		5 require int		iReqNum		= 10;   // 希望返回至多POI的数量
+		6 optional int		iAccuracy	= 0;	// 读取GPS()精度，单位m；如果获取不到数据，这里填-1上报后台
+		7 optional int		iLocateCostTime = 0;	// 获取这个精度需要时间，单位ms
+		8 optional int      iMood = 0;
+		9 optional GeoInfo_V2 stGeoInfo;		// 只获取天气的时候需要传递城市信息
+		10 optional unsigned int iUserTime;     // 客户端时间 
+	};
+
+	struct GetLbsCombinRsp_V2
+	{
+		0 require GPS_V2           stGps;      // 用户的火星坐标
+		1 require GeoInfo_V2       stGeoInfo;  // 用户的位置信息
+		2 require GetPoiInfoRsp_V2 stPoiInfo;  // 用户周边的POI
+		3 require WeatherInfo_V2   stWeather;  // 用户的天气信息	
+		4 optional int iMood = 0;
+	};
+	
+	
+
+	//---------------------------------------------
+	// 根据GPS返回附近的高校名称
+	//
+	// 子命令字 CMD_GET_NEAR_SCHOOL	= 20	
+	//
+	//---------------------------------------------
+	struct GetNearSchoolReq_V2
+	{
+		0 require GPS_V2 stGps;             // GPS经纬度(需要传MARS坐标)
+	};
+	struct GetNearSchoolRsp_V2
+	{
+		0 require vector<PoiInfo_V2> vPoiList;	//POI列表
+	};
+
+	//---------------------------------------------
+	// 根据GPS返回精品POI
+	//
+	// 子命令字 CMD_GET_SUGGEST_POI	= 30	
+	//
+	//---------------------------------------------
+	struct GetSuggestPoiReq_V2
+	{
+		0 require GPS_V2 stGps;             // GPS经纬度(需要传MARS坐标)
+	};
+	struct GetSuggestPoiRsp_V2
+	{
+		0 require vector<PoiInfo_V2> vPoiList;	//POI列表
+	};
+
+	//---------------------------------------------
+	// 根据海外GPS 取Cache中的海外数据
+	//
+	// 子命令字 CMD_GET_OVERSEA_GEO	= 40	
+	//
+	//---------------------------------------------
+	struct GetOverseaGeoReq_V2
+	{
+		0 require GPS_V2 stGps;             // GPS经纬度(需要传MARS坐标)
+	};
+	//返回包用 GetGeoInfoRsp
+
+	//---------------------------------------------
+	// 保存海外数据到Cache中
+	//
+	// 子命令字 CMD_GET_OVERSEA_GEO	= 41	
+	//
+	//---------------------------------------------
+	struct SetOverseaGeoReq_V2
+	{
+		0 require GeoInfo_V2 stGeo;             // Geo信息
+	};
+	struct SetOverseaGeoRsp_V2
+	{
+		0 require int iNumber;             // 该坐标附近的GEO数量
+	};
+
+	//---------------------------------------------
+	// 批量拉取Geo的接口
+	// 与客户端的命令字：getBatchGeo
+	//
+	//---------------------------------------------
+	struct GeoInfoCell_V2
+	{
+		0 optional GPS_V2		stGps;		// 用户的坐标,火星坐标,可用于在google地图与soso地图上准确显示
+		1 optional GeoInfo_V2	stGeoInfo;	// 位置信息	
+	};
+    struct GetBatchGeoReq_V2
+    {
+        0 require ReqCommon_V2	stCommon;	// 公共的头部
+        1 optional vector<GPS_V2> vecGpsInfo;
+    };
+    struct GetBatchGeoRsp_V2
+    {
+        0 optional vector<GeoInfoCell_V2> vecGeoInfoCell;
+    };
+	
+};
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Items</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>空间访问</string>
+				<key>id</key>
+				<string>AccessAuthority</string>
+				<key>accessory</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>不看他动态</string>
+				<key>id</key>
+				<string>FeedFilter</string>
+				<key>accessory</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>限制访问名单</string>
+				<key>id</key>
+				<string>BlackList</string>
+				<key>accessory</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

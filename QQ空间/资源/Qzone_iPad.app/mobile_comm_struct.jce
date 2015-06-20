@@ -1,0 +1,23 @@
+module NS_MOBILE_COMM
+{
+	//////////////////////////////////////////////////////////////
+	/**
+	  *   @手机Qzone公共结构体模块, 各接口可能公用的结构体请放到这里
+	*/
+
+	//黄钻相关结构体
+	enum enum_yellow_type
+	{
+		ENUM_COMM_USER = 0,
+		ENUM_YELLOW_USER = 1,
+		ENUM_HIGH_YELLOW_USER = 2,
+	};
+
+	struct yellow_info
+	{
+		0 optional int iYellowType;     //黄钻类型
+		1 optional int iYellowLevel;    //黄钻等级
+	};
+
+	
+};

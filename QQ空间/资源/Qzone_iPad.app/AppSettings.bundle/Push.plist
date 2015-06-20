@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+            <key>FootTitle</key>
+            <string>如果要关闭或开启QQ空间推送通知，请在iPad的“设置”-“通知”中，找到“QQ空间”进行更改</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>推送通知</string>
+			<key>Key</key>
+			<string>preference_push</string>
+			<key>Default Value</key>
+			<false/>
+		</dict>
+        
+        <dict>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>特别关心通知</string>
+			<key>Key</key>
+			<string>SpecialCare</string>
+			<key>Default Value</key>
+			<false/>
+		</dict>
+        <dict>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+            <key>FootTitle</key>
+            <string>设定消息通知是否带声音和震动</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>声音</string>
+			<key>Key</key>
+			<string>PushSound</string>
+			<key>Default Value</key>
+			<false/>
+		</dict>
+        
+        
+        
+        <dict>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+            <key>FootTitle</key>
+            <string>开启后，消息通知将不显示好友及内容摘要。</string>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>不显示详情</string>
+			<key>Key</key>
+			<string>NShowDetail</string>
+			<key>Default Value</key>
+			<false/>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>消息通知</string>
+</dict>
+</plist>

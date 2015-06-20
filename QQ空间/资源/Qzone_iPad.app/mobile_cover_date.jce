@@ -1,0 +1,70 @@
+
+module NS_MOBILE_COVER_DATE
+{
+    const string COVER_TYPE_DEFAULT     = "default";
+    const string COVER_TYPE_DYMAMIC     = "DynamicCover";
+    const string COVER_TYPE_STATIC      = "StaticCover";   
+    const string COVER_TYPE_SET         = "CoverSet";      
+    const string COVER_TYPE_CUSTOM      = "CustomCover";
+    const string COVER_TYPE_OLD_CUSTOM  = "CustomOldCover";
+    const string COVER_TYPE_CARTOON     = "CartoonCover";
+    const string COVER_TYPE_WEATHER     = "WeatherCover";
+    const string HIGH_RESOLUTION_COVER  = "HigeResolutionCover";
+    const string LOW_RESOLUTION_COVER   = "LowResolutionCover";
+
+    //天气
+    enum WEATHER_V2
+    {
+        DEFAULT_V2 = -1, 	//默认
+        SUNSHINE_V2 = 0,  	//晴
+        CLOUDY_V2,      	//多云
+        OVERCAST_V2,    	//阴
+        RAINY_V2,       	//雨
+        SNOW_V2,        	//雪
+        FOG_V2,         	//雾
+        RAINANDSNOW_V2, 	//雨夹雪
+        THUNDERSHOWER_V2,	//雷阵雨
+        SAND_V2, 			//沙 
+        WIND_V2, 			//风
+    };
+    
+    enum CoverStyle
+    {
+        CoverStyleAlignVerticalCenter = 0,
+        CoverStyleAlignVerticalTop = 1,
+        CoverStyleAlignVerticalBottom = 2
+    };
+
+    struct CoverPackageInfo
+    {
+        0 optional string	  prePic;
+        1 optional string	 PackageUrl;
+        2 optional string	 md5;
+        3 optional WEATHER_V2 weather;
+        4 optional short   daytime;
+        5 optional CoverStyle coverStyle;
+    };
+
+    struct CoverItemDate
+    {
+        0 optional string url; 
+        1 optional string type;
+        2 optional string md5;
+    };
+
+    struct CoverDate
+    {
+        0 optional vector<CoverItemDate> cover;
+        1 optional string CoverId;
+        2 optional string CoverType;
+    };
+
+    struct feeds_cover
+    {
+        0 optional string type;
+        1 optional map<string,string> MulRelsotionUrl;
+        2 optional NS_MOBILE_COVER_DATE::CoverPackageInfo packageInfo;
+    };
+
+};
+

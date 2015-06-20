@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,height=device-height,user-scalable=no" />
+<title>Animation Cover</title>
+<script src="libs/easeljs-0.6.1.min.js"></script>
+<script src="libs/tweenjs-0.4.1.min.js"></script>
+<script src="libs/movieclip-0.6.1.min.js"></script>
+<script src="libs/preloadjs-0.3.1.min.js"></script>
+<script src="libs/soundjs-0.4.1.min.js"></script>
+<script src="libs/bridge.js"></script>
+<script src="script/config.js"></script>
+<style>
+button {height: 50px;width: 72px;}
+</style>
+<script>
+(function(){
+var ss = '<sc' +'ript type="text/javascript" src="',
+	se = '" ></sc' + 'ript>';
+	document.write([ss,'script/',LIB_NAME,'.js',se,
+					ss,'script/action.js',se].join(''));
+})();
+</script>
+</head>
+
+<body onload="init();" style="background-color:#696969;margin:0px;padding:0px;position:relative;">
+	<div  style="width:100%;height:60px;position:absolute;left:0px;top:0px;z-index:3;background-color:#007900;margin:0px;padding:0px;">
+	<!--<button onclick="callCommand('go');">Go!</button>-->
+	<!-- <button onclick="callCommand('release');">Release</button> -->
+	<!-- <button onclick="callCommand('setPauseResume');">Pause</button> -->
+		<button onclick = "setAlign('up');"> Up </button>
+		<button onclick = "setAlign('middle');"> Middle </button>
+		<button onclick = "setAlign('down');"> Down </button>
+		<button onclick="callCommand('showFPS');">Show FPS</button>
+	</div>
+<div id="interactiveDiv" style="position:relative;margin:0px;padding:0px;">
+	
+	<!-- <div id="upDiv" style="z-index:1;width:100%;height:" ></div> -->
+	<canvas id="canvas" width="200" height="200" style="z-index:1;position:absolute;left:0px;top:60px;background-color:#696969"></canvas>
+	<div id="downDiv" style="position:absolute;left:0px;top:0px;z-index:2;width:100%;height:500px;background-color:#007900;"></div>
+</div>
+</body>
+<script type="text/javascript">
+
+	var step = 0;
+	var tmStep;
+	var STEP_LEN = 6;
+	var HOLD_TIME = 2000;
+
+	var maskDivStep = 0;
+
+	var positionTop = 60 ; //这个指上面的按钮所在div占的高度
+	var isDragging = false;
+	var plusY = 0.0;
+	var preY = 0.0;
+	var clock = null;
+	var stopTime = 0;
+	var alignStyle = "down";
+	var maxDivShowHeight = 0;
+	var divShowHeight = 0;
+	var downDiv = null;
+	var divMoveMax  = 0;
+	var canvasElement = document.getElementById("canvas");
+	var interactiveDiv = document.getElementById("interactiveDiv");
+	var canvasWidth = 0;
+	var showRatio = 220.0/320.0;
+
+	var setAlign = function(styleType){
+		alignStyle = styleType;
+
+		maxDivShowHeight = canvasWidth*showRatio;
+		divMoveMax = canvasWidth*(1.0 - showRatio);
+		divShowHeight = maxDivShowHeight;
+		downDiv = document.getElementById("downDiv");
+		downDiv.style.top = positionTop + divShowHeight + 'px';
+		
+		if(alignStyle == "up"){
+			canvasElement.style.top = positionTop + 'px';
+		}else if (alignStyle == 'middle') {
+			canvasElement.style.top = positionTop - (divMoveMax/2) + 'px';
+		}else if(alignStyle == "down"){
+
+			 canvasElement.style.top = positionTop - divMoveMax + 'px';
+		}
+	};
+
+	var TestInterface = {
+		init:function  () {
+			// if (!(isIOS || isIPad || isAndroid)) {
+		 //    	var canvas = document.getElementById("canvas");
+		 //    	canvas.setAttribute("width", 480);
+		 //    	canvas.setAttribute("height", 480);
+		 //    	canvas.style.width = "480";
+		 //    	canvas.style.height = "480px";
+		 //    };
+			canvasWidth = parseFloat( canvasElement.style.width || canvasElement.getAttribute("width") );
+			
+			setAlign(alignStyle);
+			
+		}
+
+	};
+
+	
+	function rollback(){
+		clearInterval(window.tmStep);
+		window.tmStep = null;
+		if(frameOffset < FIRE_OFFSET){ //模拟恢复
+			step = frameOffset;
+			window.tmStep = setInterval(function(){
+				step -= STEP_LEN;
+				if(step <= 0){
+					step = 0;
+					clearInterval(window.tmStep);
+					window.tmStep = null;
+				}
+				setOffset(step);
+				maskDivMove(step);
+			},100);
+		}else{
+			step = 0;
+		}
+
+		if(frameOffset >= FIRE_OFFSET) {
+			maskDivStep = MAX_OFFSET_PIXEL;
+			window.tmStep = setInterval( function(){
+				maskDivStep -= (STEP_LEN + 4);//发射后的回复要快些
+				if (maskDivStep<=0) {
+					maskDivStep = 0;
+					clearInterval(window.tmStep);
+					window.tmStep = null;
+				};
+				maskDivMove(maskDivStep);
+			}, 100);
+
+		}
+	}
+
+	
+	var preventDefault=function(ev){
+		if(ev)
+			ev.preventDefault();
+		else window.event.returnValue = false;
+	};
+
+	var touchendFunc = function(e){
+		if (isDragging){
+			preventDefault(e);
+			preY = 0.0;
+			plusY = 0.0;
+			isDragging = false;
+			window.console && console.log("Up",isDragging, preY);
+			callCommand('endDragging');
+			rollback();
+		}
+	};
+	interactiveDiv.addEventListener("touchend", touchendFunc ,false);
+	interactiveDiv.onmouseup = touchendFunc;
+
+
+	var maskDivMove = function  (offset) {
+		var move = divMoveMax * Math.min(offset,MAX_OFFSET_PIXEL) / MAX_OFFSET_PIXEL;
+			downDiv.style.top = positionTop + divShowHeight + move + 'px';
+		if (alignStyle == "up") {
+			// parseInt(Math.min((MAX_FRAME_OFFSET - BEGIN_OFFSET) * offset / MAX_OFFSET_PIXEL, MAX_FRAME_OFFSET-BEGIN_OFFSET),10);
+			
+			// var move = divMoveMax * Math.min(offset,MAX_OFFSET_PIXEL) / MAX_OFFSET_PIXEL;
+			// downDiv.style.top = positionTop + divShowHeight + move + 'px';
+		}else if (alignStyle == "middle") {
+			canvasElement.style.top = ( (parseInt(downDiv.style.top) - positionTop) - divShowHeight ) /2 - (divMoveMax/2) + positionTop + 'px';//positionTop + canvasElement.style.top + (move/2) + 'px';
+
+		}else if(alignStyle == 'down'){
+			 canvasElement.style.top = parseInt(downDiv.style.top) - canvasWidth + 'px';
+		}
+	}
+	var moveFunction = function(){
+		window.console && console.log("Move",isDragging, preY);
+		var offset = plusY/3;
+		callCommand('setOffset', offset);
+		stopTime = 0;
+
+		maskDivMove(offset);
+		
+	};
+	var touchmoveFunc = function(e){
+		preventDefault(e);
+		if (isDragging) {
+			var t = e.touches?e.touches[0]:e;
+			plusY += (t.clientY || t.pageY || 0)- preY;
+			preY = (t.clientY || t.pageY || 0);
+			
+			clock && clearTimeout(clock);
+			stopTime ++;
+			
+			
+			if(stopTime < 7) 
+				clock = setTimeout(moveFunction,50);
+			else{
+				moveFunction();
+				
+			}
+
+
+				
+		};
+	};
+	interactiveDiv.addEventListener("touchmove", touchmoveFunc, false);
+	interactiveDiv.onmousemove = touchmoveFunc;
+
+	var touchstartFunc =  function(e){
+    	preventDefault(e);
+    	isDragging = true;
+    	var t = e.touches?e.touches[0]:e;
+    	preY = t.clientY || t.pageY || 0;
+    	window.console && console.log("Down",isDragging, preY);
+    	callCommand('beginDragging');
+    };
+    interactiveDiv.addEventListener("touchstart" , touchstartFunc,false);
+    interactiveDiv.onmousedown = touchstartFunc;
+
+
+    
+
+
+</script>
+</html>

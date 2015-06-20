@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,height=device-height,user-scalable=no" />
+<title>Animation Cover</title>
+<script src="libs/easeljs-0.6.1.min.js"></script>
+<script src="libs/tweenjs-0.4.1.min.js"></script>
+<script src="libs/movieclip-0.6.1.min.js"></script>
+<script src="libs/preloadjs-0.3.1.min.js"></script>
+<script src="libs/soundjs-0.4.1.min.js"></script>
+<script src="libs/bridge.js"></script>
+<script src="script/config.js"></script>
+<script>
+(function(){
+var ss = '<sc' +'ript type="text/javascript" src="',
+	se = '" ></sc' + 'ript>';
+	document.write([ss,'script/',LIB_NAME,'.js',se,
+					ss,'script/action.js',se].join(''));
+})();
+</script>
+<script>
+var step = 0;
+var tmStep;
+var STEP_LEN = 5;
+var HOLD_TIME = 2000;
+
+function go(){
+	callCommand('beginDragging');
+	window.tmStep = setInterval(function(){
+		step += STEP_LEN;
+		if(step >= 100){
+			clearInterval(window.tmStep);
+			window.tmStep = null;
+			setTimeout(function(){
+				release();
+			},HOLD_TIME);
+		}
+		callCommand('setOffset',step);
+	},100);
+}
+
+function rollback(){
+	clearInterval(window.tmStep);
+	window.tmStep = null;
+	if(frameOffset <= FIRE_OFFSET){ //模拟恢复
+		window.tmStep = setInterval(function(){
+			step -= STEP_LEN;
+			if(step <= 0){
+				step = 0;
+				clearInterval(window.tmStep);
+				window.tmStep = null;
+			}
+			setOffset(step);
+		},100);
+	}else{
+		step = 0;
+	}
+}
+
+function release(){
+	callCommand('endDragging');
+	rollback();
+}
+
+function setPauseResume(){
+	var btn = window.event.target;
+	var curSt = btn.innerHTML;
+	if(curSt == 'Pause'){
+		btn.innerHTML = 'Resume';
+		callCommand('pause');
+	}else{
+		btn.innerHTML = 'Pause';
+		callCommand('resume');
+	}
+}
+
+</script>
+</head>
+
+<body onload="init();" style="background-color:#696969;margin:0px;">
+<div>
+<button onclick="callCommand('go');">Go!</button>
+<button onclick="callCommand('release');">Release</button>
+<button onclick="callCommand('setPauseResume');">Pause</button>
+<button onclick="callCommand('showFPS');">Show FPS</button>
+</div>
+	<canvas id="canvas" width="200" height="200" style="background-color:#696969"></canvas>
+</body>
+</html>
