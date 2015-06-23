@@ -9,22 +9,25 @@
 #import "SJMainViewController.h"
 #import "SJDock.h"
 @interface SJMainViewController ()
-@property (nonatomic,weak) UIView *dock;
+@property (nonatomic,weak) SJDock *dock;
 @end
 @implementation SJMainViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    // 设置背景色
+    self.view.backgroundColor = SJGlobalBgColor;
     
-    //添加Dock
+    // 添加dock
     SJDock *dock = [[SJDock alloc] init];
-    dock.backgroundColor = [UIColor blueColor];
-    CGFloat dockH = self.view.frame.size.height;
+#warning 一定要添加
     dock.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    dock.frame = CGRectMake(0, 0, SJDockPortraitW, dockH);
+    dock.height = self.view.height;
     [self.view addSubview:dock];
     self.dock = dock;
+    
+    // 根据当前的屏幕方向设置dock的属性
+    [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0.0];
 }
 
 /**
@@ -32,14 +35,6 @@
  */
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-        CGRect dockF = self.dock.frame;
-        dockF.size.width = SJDockLandscapeW;
-        self.dock.frame = dockF;
-    } else {
-        CGRect dockF = self.dock.frame;
-        dockF.size.width = SJDockPortraitW;
-        self.dock.frame = dockF;
-    }
+    [self.dock rotate:UIInterfaceOrientationIsLandscape(toInterfaceOrientation)];
 }
 @end

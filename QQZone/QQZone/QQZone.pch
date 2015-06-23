@@ -14,12 +14,19 @@
 #ifdef __OBJC__
 
 #import "UIImage+SJ.h"
+#import "UIView+MJ.h"
 
 //获取RGB颜色
 #define SJColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
 #define SJGlobalBgColor SJColor(55,55,55)
-#define SJDockPortraitW 70
-#define SJDockLandscapeW 210
+
+//底部菜单按钮的尺寸
+#define SJBottomMenuButtonPortraitW 70.0
+#define SJBottomMenuButtonLandscapeW 90.0
+#define SJBottomMenuButtonH 70.0
+
+#define iOS7 ([UIDevice currentDevice].systemVersion > 7.0)
+
 #endif
 #endif

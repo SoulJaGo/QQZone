@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96B382D21B393D27000891CC /* SJIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D11B393D27000891CC /* SJIconButton.m */; };
+		96B382D51B393D65000891CC /* SJTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D41B393D65000891CC /* SJTabBar.m */; };
+		96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D71B393D89000891CC /* SJBottomMenu.m */; };
+		96B382DB1B39418F000891CC /* UIView+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382DA1B39418F000891CC /* UIView+MJ.m */; };
+		96B382DF1B395F03000891CC /* SJTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382DE1B395F03000891CC /* SJTabBarButton.m */; };
 		96DD7D1C1B34F85A00F86984 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1B1B34F85A00F86984 /* main.m */; };
 		96DD7D1F1B34F85A00F86984 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1E1B34F85A00F86984 /* AppDelegate.m */; };
 		96DD7D251B34F85A00F86984 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96DD7D231B34F85A00F86984 /* Main.storyboard */; };
@@ -30,6 +35,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		96B382D01B393D27000891CC /* SJIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJIconButton.h; sourceTree = "<group>"; };
+		96B382D11B393D27000891CC /* SJIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJIconButton.m; sourceTree = "<group>"; };
+		96B382D31B393D65000891CC /* SJTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJTabBar.h; sourceTree = "<group>"; };
+		96B382D41B393D65000891CC /* SJTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJTabBar.m; sourceTree = "<group>"; };
+		96B382D61B393D89000891CC /* SJBottomMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJBottomMenu.h; sourceTree = "<group>"; };
+		96B382D71B393D89000891CC /* SJBottomMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJBottomMenu.m; sourceTree = "<group>"; };
+		96B382D91B39418F000891CC /* UIView+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJ.h"; sourceTree = "<group>"; };
+		96B382DA1B39418F000891CC /* UIView+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJ.m"; sourceTree = "<group>"; };
+		96B382DD1B395F03000891CC /* SJTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJTabBarButton.h; sourceTree = "<group>"; };
+		96B382DE1B395F03000891CC /* SJTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJTabBarButton.m; sourceTree = "<group>"; };
 		96DD7D161B34F85A00F86984 /* QQZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DD7D1A1B34F85A00F86984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DD7D1B1B34F85A00F86984 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,6 +85,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96B382DC1B395EDE000891CC /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				96B382DD1B395F03000891CC /* SJTabBarButton.h */,
+				96B382DE1B395F03000891CC /* SJTabBarButton.m */,
+				96B382D31B393D65000891CC /* SJTabBar.h */,
+				96B382D41B393D65000891CC /* SJTabBar.m */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
 		96DD7D0D1B34F85A00F86984 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +186,8 @@
 		96DD7D451B34FF8500F86984 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				96B382D91B39418F000891CC /* UIView+MJ.h */,
+				96B382DA1B39418F000891CC /* UIView+MJ.m */,
 				96DD7D461B34FF9000F86984 /* UIImage+SJ.h */,
 				96DD7D471B34FF9000F86984 /* UIImage+SJ.m */,
 			);
@@ -178,8 +206,13 @@
 		96DD7D501B35968A00F86984 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96B382DC1B395EDE000891CC /* TabBar */,
 				96DD7D4C1B35967B00F86984 /* SJDock.h */,
 				96DD7D4D1B35967B00F86984 /* SJDock.m */,
+				96B382D01B393D27000891CC /* SJIconButton.h */,
+				96B382D11B393D27000891CC /* SJIconButton.m */,
+				96B382D61B393D89000891CC /* SJBottomMenu.h */,
+				96B382D71B393D89000891CC /* SJBottomMenu.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -285,10 +318,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				96DD7D481B34FF9000F86984 /* UIImage+SJ.m in Sources */,
+				96B382D21B393D27000891CC /* SJIconButton.m in Sources */,
+				96B382DF1B395F03000891CC /* SJTabBarButton.m in Sources */,
 				96DD7D441B34F96F00F86984 /* SJLoginViewController.m in Sources */,
+				96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */,
 				96DD7D4B1B3593F200F86984 /* SJMainViewController.m in Sources */,
+				96B382DB1B39418F000891CC /* UIView+MJ.m in Sources */,
 				96DD7D4E1B35967B00F86984 /* SJDock.m in Sources */,
 				96DD7D1F1B34F85A00F86984 /* AppDelegate.m in Sources */,
+				96B382D51B393D65000891CC /* SJTabBar.m in Sources */,
 				96DD7D1C1B34F85A00F86984 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +530,7 @@
 				96DD7D3B1B34F85A00F86984 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96DD7D3C1B34F85A00F86984 /* Build configuration list for PBXNativeTarget "QQZoneTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +539,7 @@
 				96DD7D3E1B34F85A00F86984 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

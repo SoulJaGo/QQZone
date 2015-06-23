@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (SJ)
-//+ (UIImage *)imageWithName:(NSString *)name;
++ (UIImage *)imageWithName:(NSString *)name;
 /**
  *  返回一张自由拉伸的图片
  */

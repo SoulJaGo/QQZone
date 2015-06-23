@@ -7,7 +7,80 @@
 //
 
 #import "SJDock.h"
+#import "SJIconButton.h"
+#import "SJTabBar.h"
+#import "SJBottomMenu.h"
 
+@interface SJDock ()
+@property (nonatomic,weak) SJIconButton *iconButton;
+@property (nonatomic,weak) SJTabBar *tabBar;
+@property (nonatomic,weak) SJBottomMenu *bottomMenu;
+@end
 @implementation SJDock
+- (id)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        //1.头像
+        [self setupIconButton];
+        
+        //2.选项卡
+        [self setupTabBar];
+        
+        //3.底部菜单
+        [self setupBottomMenu];
+    }
+    return self;
+}
 
+/**
+ *  头像
+ */
+- (void)setupIconButton
+{
+    SJIconButton *iconButton = [[SJIconButton alloc] init];
+    [self addSubview:iconButton];
+    self.iconButton = iconButton;
+}
+
+/**
+ *  选项卡
+ */
+- (void)setupTabBar
+{
+    SJTabBar *tabBar = [[SJTabBar alloc] init];
+    [self addSubview:tabBar];
+    self.tabBar = tabBar;
+}
+
+/**
+ *  底部菜单
+ */
+- (void)setupBottomMenu
+{
+    SJBottomMenu *bottomMenu = [[SJBottomMenu alloc] init];
+    bottomMenu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [self addSubview:bottomMenu];
+    self.bottomMenu = bottomMenu;
+}
+
+/**
+ *  旋转判断是否为横屏
+ */
+- (void)rotate:(BOOL)landscape
+{
+    //2.调整底部菜单
+    [self.bottomMenu rotate:landscape];
+    
+    //2.设置dock自己的属性
+    self.height = self.superview.height;
+    self.width = self.bottomMenu.width;
+    
+    //3.调整头像
+    [self.iconButton rotate:landscape];
+ 
+    //4.调整tabBar
+    [self.tabBar rotate:landscape];
+    self.tabBar.y = self.bottomMenu.y - self.tabBar.height;
+    self.tabBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+}
 @end
