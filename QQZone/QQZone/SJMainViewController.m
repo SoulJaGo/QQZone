@@ -9,9 +9,11 @@
 #import "SJMainViewController.h"
 #import "SJDock.h"
 #import "SJAllStatusViewController.h"
+#import "SJNavigationController.h"
+#import "SJComposeViewController.h"
 #define SJRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:1.0]
 #define SJContentViewW 600
-@interface SJMainViewController () <SJTabBarDelegate>
+@interface SJMainViewController () <SJTabBarDelegate,SJBottomMenuDelegate>
 @property (nonatomic,weak) SJDock *dock;
 @property (nonatomic, weak) UIViewController *currentChildViewController;
 /**
@@ -50,40 +52,33 @@
 - (void)setupChildViewControllers
 {
     SJAllStatusViewController *allStatus = [[SJAllStatusViewController alloc] init];
-    UINavigationController *nav0 = [[UINavigationController alloc] initWithRootViewController:allStatus];
-    [self addChildViewController:nav0];
+    [self setupOneChildViewController:allStatus];
     
     UIViewController *vc1 = [[UIViewController alloc] init];
-    vc1.view.backgroundColor = SJRandomColor;
-    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
-    [self addChildViewController:nav1];
+    [self setupOneChildViewController:vc1];
     
     UIViewController *vc2 = [[UIViewController alloc] init];
-    vc2.view.backgroundColor = SJRandomColor;
-    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
-    [self addChildViewController:nav2];
+    [self setupOneChildViewController:vc2];
     
     UIViewController *vc3 = [[UIViewController alloc] init];
-    vc3.view.backgroundColor = SJRandomColor;
-    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:vc3];
-    [self addChildViewController:nav3];
+    [self setupOneChildViewController:vc3];
     
     UIViewController *vc4 = [[UIViewController alloc] init];
-    vc4.view.backgroundColor = SJRandomColor;
-    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:vc4];
-    [self addChildViewController:nav4];
+    [self setupOneChildViewController:vc4];
     
     UIViewController *vc5 = [[UIViewController alloc] init];
-    vc5.view.backgroundColor = SJRandomColor;
-    UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:vc5];
-    [self addChildViewController:nav5];
+    [self setupOneChildViewController:vc5];
     
     // 点击头像显示的主页控制器
     UIViewController *home = [[UIViewController alloc] init];
-    home.view.backgroundColor = [UIColor whiteColor];
-    UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
-    [self addChildViewController:homeNav];
+    [self setupOneChildViewController:home];
 
+}
+
+- (void)setupOneChildViewController:(UIViewController *)vc
+{
+    SJNavigationController *nav = [[SJNavigationController alloc] initWithRootViewController:vc];
+    [self addChildViewController:nav];
 }
 
 #pragma mark - SJTabBarDelegate
@@ -93,6 +88,10 @@
     UIViewController *newVc = self.childViewControllers[to];
     if (newVc.view.superview) return;
     newVc.view.frame = self.contentView.bounds;
+    
+    //取出导航控制器的根控制器
+    UIViewController *rootVc = [newVc.childViewControllers firstObject];
+    rootVc.view.backgroundColor = SJColor(212, 212, 212);
     
     // 2.旧控制器
     UIViewController *oldVc;
@@ -143,6 +142,9 @@
     
     //监听头像点击
     [self.dock.iconButton addTarget:self action:@selector(iconClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    //设置buttonMenu的代理
+    self.dock.bottomMenu.delegate = self;
 }
 
 /**
@@ -183,5 +185,25 @@
     [UIView animateWithDuration:duration animations:^{
         [self.dock rotate:UIInterfaceOrientationIsLandscape(toInterfaceOrientation)];
     }];
+}
+
+#pragma mark - SJBottomMenuDelegate
+- (void)bottomMenu:(SJBottomMenu *)bottomMenu didClickButton:(SJBottomMenuButtonType)button
+{
+    switch (button) {
+        case SJBottomMenuButtonTypeBlog:
+        case SJBottomMenuButtonTypePhoto:
+        case SJBottomMenuButtonTypeMood:
+        {
+            SJComposeViewController *compose = [[SJComposeViewController alloc] init];
+            SJNavigationController *nav = [[SJNavigationController alloc] initWithRootViewController:compose];
+            [self presentViewController:nav animated:YES completion:nil];
+            self.modalPresentationStyle = UIModalPresentationFormSheet;
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 @end

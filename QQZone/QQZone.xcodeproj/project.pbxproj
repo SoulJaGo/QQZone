@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96612ACC1B3A712D00E46D15 /* SJComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96612ACB1B3A712D00E46D15 /* SJComposeViewController.m */; };
 		96B382D21B393D27000891CC /* SJIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D11B393D27000891CC /* SJIconButton.m */; };
 		96B382D51B393D65000891CC /* SJTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D41B393D65000891CC /* SJTabBar.m */; };
 		96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D71B393D89000891CC /* SJBottomMenu.m */; };
@@ -15,6 +16,7 @@
 		96C5D8401B3A49790060B334 /* SJAllStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D83F1B3A49790060B334 /* SJAllStatusViewController.m */; };
 		96C5D8441B3A4DC80060B334 /* SJSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D8431B3A4DC80060B334 /* SJSegmentControl.m */; };
 		96C5D8471B3A53DC0060B334 /* SJSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D8461B3A53DC0060B334 /* SJSegment.m */; };
+		96C5D84A1B3A61FD0060B334 /* SJNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D8491B3A61FD0060B334 /* SJNavigationController.m */; };
 		96DD7D1C1B34F85A00F86984 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1B1B34F85A00F86984 /* main.m */; };
 		96DD7D1F1B34F85A00F86984 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1E1B34F85A00F86984 /* AppDelegate.m */; };
 		96DD7D251B34F85A00F86984 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96DD7D231B34F85A00F86984 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		96612ACA1B3A712D00E46D15 /* SJComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJComposeViewController.h; sourceTree = "<group>"; };
+		96612ACB1B3A712D00E46D15 /* SJComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJComposeViewController.m; sourceTree = "<group>"; };
 		96B382D01B393D27000891CC /* SJIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJIconButton.h; sourceTree = "<group>"; };
 		96B382D11B393D27000891CC /* SJIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJIconButton.m; sourceTree = "<group>"; };
 		96B382D31B393D65000891CC /* SJTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJTabBar.h; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 		96C5D8431B3A4DC80060B334 /* SJSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJSegmentControl.m; sourceTree = "<group>"; };
 		96C5D8451B3A53DC0060B334 /* SJSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJSegment.h; sourceTree = "<group>"; };
 		96C5D8461B3A53DC0060B334 /* SJSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJSegment.m; sourceTree = "<group>"; };
+		96C5D8481B3A61FD0060B334 /* SJNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJNavigationController.h; sourceTree = "<group>"; };
+		96C5D8491B3A61FD0060B334 /* SJNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJNavigationController.m; sourceTree = "<group>"; };
 		96DD7D161B34F85A00F86984 /* QQZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DD7D1A1B34F85A00F86984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DD7D1B1B34F85A00F86984 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -119,6 +125,8 @@
 			children = (
 				96C5D83E1B3A49790060B334 /* SJAllStatusViewController.h */,
 				96C5D83F1B3A49790060B334 /* SJAllStatusViewController.m */,
+				96C5D8481B3A61FD0060B334 /* SJNavigationController.h */,
+				96C5D8491B3A61FD0060B334 /* SJNavigationController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -252,6 +260,8 @@
 				96B382D11B393D27000891CC /* SJIconButton.m */,
 				96B382D61B393D89000891CC /* SJBottomMenu.h */,
 				96B382D71B393D89000891CC /* SJBottomMenu.m */,
+				96612ACA1B3A712D00E46D15 /* SJComposeViewController.h */,
+				96612ACB1B3A712D00E46D15 /* SJComposeViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -359,8 +369,10 @@
 				96DD7D481B34FF9000F86984 /* UIImage+SJ.m in Sources */,
 				96B382D21B393D27000891CC /* SJIconButton.m in Sources */,
 				96B382DF1B395F03000891CC /* SJTabBarButton.m in Sources */,
+				96C5D84A1B3A61FD0060B334 /* SJNavigationController.m in Sources */,
 				96C5D8401B3A49790060B334 /* SJAllStatusViewController.m in Sources */,
 				96DD7D441B34F96F00F86984 /* SJLoginViewController.m in Sources */,
+				96612ACC1B3A712D00E46D15 /* SJComposeViewController.m in Sources */,
 				96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */,
 				96C5D8471B3A53DC0060B334 /* SJSegment.m in Sources */,
 				96DD7D4B1B3593F200F86984 /* SJMainViewController.m in Sources */,

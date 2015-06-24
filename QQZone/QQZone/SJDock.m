@@ -12,7 +12,7 @@
 #import "SJBottomMenu.h"
 
 @interface SJDock ()
-@property (nonatomic,weak) SJBottomMenu *bottomMenu;
+
 @end
 @implementation SJDock
 - (id)initWithFrame:(CGRect)frame
@@ -58,7 +58,7 @@
     SJBottomMenu *bottomMenu = [[SJBottomMenu alloc] init];
     bottomMenu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [self addSubview:bottomMenu];
-    self.bottomMenu = bottomMenu;
+    _bottomMenu = bottomMenu;
 }
 
 /**

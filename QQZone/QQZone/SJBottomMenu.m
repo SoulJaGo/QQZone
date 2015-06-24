@@ -14,19 +14,27 @@
     self = [super initWithFrame:frame];
     if (self) {
         // 初始化3个按钮
-        [self setupButtonWithIcon:@"tabbar_mood"];
-        [self setupButtonWithIcon:@"tabbar_photo"];
-        [self setupButtonWithIcon:@"tabbar_blog"];
+        [self setupButtonWithIcon:@"tabbar_mood" tag:SJBottomMenuButtonTypeMood];
+        [self setupButtonWithIcon:@"tabbar_photo" tag:SJBottomMenuButtonTypePhoto];
+        [self setupButtonWithIcon:@"tabbar_blog" tag:SJBottomMenuButtonTypeBlog];
     }
     return self;
 }
 
-- (void)setupButtonWithIcon:(NSString *)icon
+- (void)setupButtonWithIcon:(NSString *)icon tag:(SJBottomMenuButtonType)tag
 {
     UIButton *button = [[UIButton alloc] init];
     [button setImage:[UIImage imageWithName:icon] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage resizeImageWithName:@"tabbar_separate_selected_bg"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(buttonClick:)    forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
+}
+
+- (void)buttonClick:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(bottomMenu:didClickButton:)]) {
+        [self.delegate bottomMenu:self didClickButton:(int)button.tag];
+    }
 }
 
 

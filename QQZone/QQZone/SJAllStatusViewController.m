@@ -8,6 +8,7 @@
 
 #import "SJAllStatusViewController.h"
 #import "SJSegmentControl.h"
+#import "SJNavigationController.h"
 
 @interface SJAllStatusViewController ()
 
@@ -20,7 +21,7 @@
     SJSegmentControl *sc = [[SJSegmentControl alloc] init];
     self.view.backgroundColor = [UIColor blueColor];
     sc.items = @[@"全部",@"好友动态",@"好友"];
-    sc.selectedIndex = 2;
+    sc.selectedIndex = 0;
     sc.frame = CGRectMake(0, 0, 300, 30);
     self.navigationItem.titleView = sc;
 }
