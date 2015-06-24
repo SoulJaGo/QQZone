@@ -37,6 +37,7 @@
 
 - (void)setupContentView
 {
+    //1.创建
     UIView *contentView = [[UIView alloc] init];
     contentView.width = SJContentViewW;
     contentView.height = self.view.height;
@@ -44,6 +45,22 @@
     contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:contentView];
     self.contentView = contentView;
+    
+    //2.pan
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self    action:@selector(dragContentView:)];
+    [self.contentView addGestureRecognizer:recognizer];
+}
+
+- (void)dragContentView:(UIPanGestureRecognizer *)pan
+{
+    if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled) {
+        [UIView animateWithDuration:0.25 animations:^{
+            pan.view.transform = CGAffineTransformIdentity;
+        }];
+    }
+    
+    CGPoint translation = [pan translationInView:pan.view];
+    pan.view.transform = CGAffineTransformMakeTranslation(translation.x * 0.2, 0);
 }
 
 /**
