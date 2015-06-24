@@ -12,8 +12,6 @@
 #import "SJBottomMenu.h"
 
 @interface SJDock ()
-@property (nonatomic,weak) SJIconButton *iconButton;
-@property (nonatomic,weak) SJTabBar *tabBar;
 @property (nonatomic,weak) SJBottomMenu *bottomMenu;
 @end
 @implementation SJDock
@@ -39,7 +37,7 @@
 {
     SJIconButton *iconButton = [[SJIconButton alloc] init];
     [self addSubview:iconButton];
-    self.iconButton = iconButton;
+    _iconButton = iconButton;
 }
 
 /**
@@ -49,7 +47,7 @@
 {
     SJTabBar *tabBar = [[SJTabBar alloc] init];
     [self addSubview:tabBar];
-    self.tabBar = tabBar;
+    _tabBar = tabBar;
 }
 
 /**

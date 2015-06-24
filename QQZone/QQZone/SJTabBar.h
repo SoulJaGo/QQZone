@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SJTabBar;
+@protocol SJTabBarDelegate <NSObject>
 
+@optional
+- (void)tabBar:(SJTabBar *)tabBar didSelectButtonFrom:(int)from to:(int)to;
+
+@end
 @interface SJTabBar : UIView
 - (void)rotate:(BOOL)landscape;
+- (void)unselect;
+@property (nonatomic,weak) id<SJTabBarDelegate> delegate;
 @end

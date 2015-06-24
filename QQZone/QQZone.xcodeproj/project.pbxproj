@@ -12,6 +12,9 @@
 		96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382D71B393D89000891CC /* SJBottomMenu.m */; };
 		96B382DB1B39418F000891CC /* UIView+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382DA1B39418F000891CC /* UIView+MJ.m */; };
 		96B382DF1B395F03000891CC /* SJTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B382DE1B395F03000891CC /* SJTabBarButton.m */; };
+		96C5D8401B3A49790060B334 /* SJAllStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D83F1B3A49790060B334 /* SJAllStatusViewController.m */; };
+		96C5D8441B3A4DC80060B334 /* SJSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D8431B3A4DC80060B334 /* SJSegmentControl.m */; };
+		96C5D8471B3A53DC0060B334 /* SJSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C5D8461B3A53DC0060B334 /* SJSegment.m */; };
 		96DD7D1C1B34F85A00F86984 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1B1B34F85A00F86984 /* main.m */; };
 		96DD7D1F1B34F85A00F86984 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DD7D1E1B34F85A00F86984 /* AppDelegate.m */; };
 		96DD7D251B34F85A00F86984 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96DD7D231B34F85A00F86984 /* Main.storyboard */; };
@@ -45,6 +48,12 @@
 		96B382DA1B39418F000891CC /* UIView+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJ.m"; sourceTree = "<group>"; };
 		96B382DD1B395F03000891CC /* SJTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJTabBarButton.h; sourceTree = "<group>"; };
 		96B382DE1B395F03000891CC /* SJTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJTabBarButton.m; sourceTree = "<group>"; };
+		96C5D83E1B3A49790060B334 /* SJAllStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAllStatusViewController.h; sourceTree = "<group>"; };
+		96C5D83F1B3A49790060B334 /* SJAllStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAllStatusViewController.m; sourceTree = "<group>"; };
+		96C5D8421B3A4DC80060B334 /* SJSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJSegmentControl.h; sourceTree = "<group>"; };
+		96C5D8431B3A4DC80060B334 /* SJSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJSegmentControl.m; sourceTree = "<group>"; };
+		96C5D8451B3A53DC0060B334 /* SJSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJSegment.h; sourceTree = "<group>"; };
+		96C5D8461B3A53DC0060B334 /* SJSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJSegment.m; sourceTree = "<group>"; };
 		96DD7D161B34F85A00F86984 /* QQZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DD7D1A1B34F85A00F86984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96DD7D1B1B34F85A00F86984 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +105,35 @@
 			name = TabBar;
 			sourceTree = "<group>";
 		};
+		96C5D83C1B3A49340060B334 /* AllStatus */ = {
+			isa = PBXGroup;
+			children = (
+				96C5D8411B3A4DA40060B334 /* View */,
+				96C5D83D1B3A49440060B334 /* Controller */,
+			);
+			name = AllStatus;
+			sourceTree = "<group>";
+		};
+		96C5D83D1B3A49440060B334 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				96C5D83E1B3A49790060B334 /* SJAllStatusViewController.h */,
+				96C5D83F1B3A49790060B334 /* SJAllStatusViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		96C5D8411B3A4DA40060B334 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96C5D8421B3A4DC80060B334 /* SJSegmentControl.h */,
+				96C5D8431B3A4DC80060B334 /* SJSegmentControl.m */,
+				96C5D8451B3A53DC0060B334 /* SJSegment.h */,
+				96C5D8461B3A53DC0060B334 /* SJSegment.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		96DD7D0D1B34F85A00F86984 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +155,7 @@
 		96DD7D181B34F85A00F86984 /* QQZone */ = {
 			isa = PBXGroup;
 			children = (
+				96C5D83C1B3A49340060B334 /* AllStatus */,
 				96DD7D411B34F94900F86984 /* Other */,
 				96DD7D401B34F94400F86984 /* Login */,
 				96DD7D3F1B34F93E00F86984 /* Main */,
@@ -320,9 +359,12 @@
 				96DD7D481B34FF9000F86984 /* UIImage+SJ.m in Sources */,
 				96B382D21B393D27000891CC /* SJIconButton.m in Sources */,
 				96B382DF1B395F03000891CC /* SJTabBarButton.m in Sources */,
+				96C5D8401B3A49790060B334 /* SJAllStatusViewController.m in Sources */,
 				96DD7D441B34F96F00F86984 /* SJLoginViewController.m in Sources */,
 				96B382D81B393D89000891CC /* SJBottomMenu.m in Sources */,
+				96C5D8471B3A53DC0060B334 /* SJSegment.m in Sources */,
 				96DD7D4B1B3593F200F86984 /* SJMainViewController.m in Sources */,
+				96C5D8441B3A4DC80060B334 /* SJSegmentControl.m in Sources */,
 				96B382DB1B39418F000891CC /* UIView+MJ.m in Sources */,
 				96DD7D4E1B35967B00F86984 /* SJDock.m in Sources */,
 				96DD7D1F1B34F85A00F86984 /* AppDelegate.m in Sources */,

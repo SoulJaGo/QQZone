@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>355566BE-28C4-4292-9955-FBBD6019241F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>QQZone</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>BD68AA21B4017D4AC33901594E25868F7F2D9E83</key>
 		<string>https://github.com/SoulJaGo/QQZone.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>QQZone/QQZone.xcodeproj/project.xcworkspace</string>
+	<string>QQZone/QQZone.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BD68AA21B4017D4AC33901594E25868F7F2D9E83</key>

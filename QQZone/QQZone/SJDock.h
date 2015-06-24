@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SJTabBar.h"
+#import "SJIconButton.h"
 
 @interface SJDock : UIView
+@property (nonatomic,weak,readonly) SJTabBar *tabBar;
+@property (nonatomic,weak,readonly) SJIconButton *iconButton;
 - (void)rotate:(BOOL)landscape;
 @end

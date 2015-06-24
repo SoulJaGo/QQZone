@@ -28,5 +28,6 @@
 
 #define iOS7 ([UIDevice currentDevice].systemVersion > 7.0)
 
+#define SJCurrentChildViewControllerW 600
 #endif
 #endif

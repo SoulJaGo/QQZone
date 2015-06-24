@@ -29,9 +29,16 @@
     return self;
 }
 
+- (void)unselect
+{
+    self.selectedButton.selected = NO;
+}
+
+
 - (void)setupButtonWithIcon:(NSString *)icon title:(NSString *)title
 {
     SJTabBarButton *button = [[SJTabBarButton alloc] init];
+    button.tag = self.subviews.count;
     [button setImage:[UIImage imageWithName:icon] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage resizeImageWithName:@"tabbar_separate_selected_bg"] forState:UIControlStateSelected];
     [button setTitle:title forState:UIControlStateNormal];
@@ -44,6 +51,14 @@
  */
 - (void)buttonClick:(SJTabBarButton *)button
 {
+    // 1.通知代理
+    if ([self.delegate respondsToSelector:@selector(tabBar:didSelectButtonFrom:to:)]) {
+        [self.delegate tabBar:self didSelectButtonFrom:(int)self.selectedButton.tag to:(int)button.tag];
+    }
+
+
+    
+    //2.更改按钮的状态
     self.selectedButton.selected = NO;
     button.selected = YES;
     self.selectedButton = button;
